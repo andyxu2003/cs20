@@ -5,10 +5,9 @@
     <body>
       <script>
         $.get( 
-            "json2.json", 
+            "https://andyxu2003.github.io/cs20/json2.json", 
             function(data) {
-                str = JSON.stringify(data);
-                var array = JSON.stringify(str, null, 3);
+                var array = JSON.stringify(data, null, 3);
                 document.body.innerHTML = array;
             }
         )       

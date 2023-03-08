@@ -3,14 +3,51 @@
     <title>Read JSON file in HTML</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <body>
+      <h1>Song List</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>Song name</th>
+				<th>Artist</th>
+				<th>Genre</th>
+				<th>Year released</th>
+			</tr>
+		</thead>
+		<tbody id="song-table">
+		</tbody>
+	</table>
+
       <script>
         $.get( 
             "https://andyxu2003.github.io/cs20/json2.json", 
             function(data) {
-                var array = JSON.stringify(data, null, 3);
-                document.body.innerHTML = array;
+                var songList = JSON.stringify(data, null, 3);
+                document.body.innerHTML = songList;
             }
-        )       
+        )     
+        const songTable = document.getElementById("song-table");
+		songList.songList.forEach(song => {
+			const tr = document.createElement("tr");
+			const titleTd = document.createElement("td");
+			const artistTd = document.createElement("td");
+			const genreTd = document.createElement("td");
+			const yearTd = document.createElement("td");
+
+			titleTd.innerText = song.title;
+			artistTd.innerText = song.artists.join(", ");
+			genreTd.innerText = song.genres.join(", ");
+			yearTd.innerText = song.year;
+
+			tr.appendChild(titleTd);
+			tr.appendChild(artistTd);
+			tr.appendChild(genreTd);
+			tr.appendChild(yearTd);
+
+			songTable.appendChild(tr);
+		});
+	</script>
+</body>
+</html>  
         </script>
     </body>
   </head>

@@ -4,35 +4,9 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<title>Song List</title>
 	<style>
-		table {
-			border-collapse: collapse;
-			width: 100%;
-		}
-
-		th, td {
-			padding: 8px;
-			text-align: left;
-			border-bottom: 1px solid #ddd;
-		}
-
-		th {
-			background-color: #f2f2f2;
-		}
 	</style>
 </head>
 <body>
-	<table>
-		<thead>
-			<tr>
-				<th>Title</th>
-				<th>Artist</th>
-				<th>Genre</th>
-				<th>Year</th>
-			</tr>
-		</thead>
-		<tbody id="songTable">
-		</tbody>
-	</table>
 
 	<script>
 		// Get the JSON object
@@ -43,30 +17,6 @@
               document.write(songList);
             }
         )     
-
-		// Create a row for each song
-		const songTable = document.getElementById('songTable');
-		for (let i = 0; i < songList.songList.length; i++) {
-			const song = songList.songList[i];
-
-			const row = document.createElement('tr');
-			const titleCell = document.createElement('td');
-			const artistCell = document.createElement('td');
-			const genreCell = document.createElement('td');
-			const yearCell = document.createElement('td');
-
-			titleCell.textContent = song.title;
-			artistCell.textContent = song.artists.join(', ');
-			genreCell.textContent = song.genres.join(', ');
-			yearCell.textContent = song.year;
-
-			row.appendChild(titleCell);
-			row.appendChild(artistCell);
-			row.appendChild(genreCell);
-			row.appendChild(yearCell);
-
-			songTable.appendChild(row);
-		}
 	</script>
 </body>
 </html>

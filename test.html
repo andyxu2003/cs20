@@ -1,9 +1,107 @@
-$.get( 
-            "https://andyxu2003.github.io/cs20/json2.json", 
-            function(data) {
-                var songList = JSON.stringify(data, null, 3);
-                document.body.innerHTML = songList;
-            }
-        )     
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JSON Display with Filter</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+      .divide {
+        margin: 20px;
+      }
+    </style>
+    <script>
+	var jsonString = "";
+      $(document).ready(function () {
+        $.getJSON(
+          "https://andyxu2003.github.io/cs20/json2.json",
+          function (data) {
+            var genres = [];
+			
 
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            $.each(data.songList, function (key, value) {
+              // Add each genre to array
+              $.each(value.genres, function (index, genre) {
+                if (!genres.includes(genre)) {
+                  genres.push(genre);
+                }
+              });
+            });
+            // Sort array alphabetically
+            genres.sort();
+
+            // Add genres to select element
+            $.each(genres, function (key, value) {
+              $("#genreSelect").append(
+                $("<option></option>").attr("value", value).text(value)
+              );
+            });
+
+			jsonString = JSON.stringify({"songList": allSongs}, null, 2);
+
+            // Display all songs by default
+            displaySongs(data.songList);
+
+            // Handle form submission
+            $("#filterForm").submit(function (event) {
+              event.preventDefault();
+              var selectedGenre = $("#genreSelect").val();
+              var filteredSongs = $.grep(data.songList, function (song) {
+                return song.genres.includes(selectedGenre);
+              });
+              displaySongs(filteredSongs);
+            });
+          }
+        );
+      });
+
+      function displaySongs(songs) {
+        // Clear song list
+        $("#songList").empty();
+
+        // Display each song
+        $.each(songs, function (key, value) {
+          var output =
+            "<p>Title: " +
+            value.title +
+            "<br>" +
+            "Artists: " +
+            value.artists.join(", ") +
+            "<br>" +
+            "Genres: " +
+            value.genres.join(", ") +
+            "<br>" +
+            "Year: " +
+            value.year +
+            "</p>";
+          $("#songList").append(output);
+        });
+
+        // Update the raw JSON string
+        $("#jsonString").text(jsonString);
+      }
+    </script>
+    <!-- <script>
+      $(document).ready(function () {
+        $("#jsonString").hide();
+        $("button").click(function () {
+          $(".hide").toggle();
+        });
+      });
+    </script> -->
+  </head>
+  <body>
+	<h1>
+		Andy's JSON Song List
+	</h1>
+    <button>Raw JSON String</button>
+    <div class="divide"></div>
+    <p id="jsonString" class="hide"></p>
+    <form id="filterForm">
+      <label for="genreSelect">Genre:</label>
+      <select id="genreSelect">
+        <option value="">All</option>
+      </select>
+      <button type="submit">Filter</button>
+    </form>
+    <div id="songList"></div>
+  </body>
+</html>

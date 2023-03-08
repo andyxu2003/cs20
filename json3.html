@@ -1,26 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<title>Song List</title>
-	<style>
-		table {
-			border-collapse: collapse;
-			width: 100%;
-		}
-
-		th, td {
-			padding: 8px;
-			text-align: left;
-			border-bottom: 1px solid #ddd;
-		}
-
-		th {
-			background-color: #f2f2f2;
-		}
-	</style>
+	<title>My Songs Table</title>
 </head>
 <body>
+	<h1>My Songs Table</h1>
 	<table>
 		<thead>
 			<tr>
@@ -30,43 +14,30 @@
 				<th>Year</th>
 			</tr>
 		</thead>
-		<tbody id="songTable">
+		<tbody>
+			<script>
+				$.get( 
+                "https://andyxu2003.github.io/cs20/json2.json", 
+                function(data) {
+                    var songList = JSON.stringify(data);
+                    //document.write(songList);
+                }
+                )    
+				var tbody = document.getElementsByTagName("tbody")[0];
+				for (var i = 0; i < songList.songList.length; i++) {
+				    var song = songList.songList[i];
+				    var row = tbody.insertRow();
+				    var titleCell = row.insertCell();
+				    var artistCell = row.insertCell();
+				    var genreCell = row.insertCell();
+				    var yearCell = row.insertCell();
+				    titleCell.innerHTML = song.title;
+				    artistCell.innerHTML = song.artists.join("<br>");
+				    genreCell.innerHTML = song.genres.join("<br>");
+				    yearCell.innerHTML = song.year;
+				}
+			</script>
 		</tbody>
 	</table>
-
-	<script>
-		// Get the JSON object
-    $.get( 
-            "https://andyxu2003.github.io/cs20/json2.json", 
-            function(data) {
-                var songList = JSON.stringify(data, null, 3);
-                //document.body.innerHTML = songList;
-            }
-        )     
-
-		// Create a row for each song
-		const songTable = document.getElementById('songTable');
-		for (let i = 0; i < songList.songList.length; i++) {
-			const song = songList.songList[i];
-
-			const row = document.createElement('tr');
-			const titleCell = document.createElement('td');
-			const artistCell = document.createElement('td');
-			const genreCell = document.createElement('td');
-			const yearCell = document.createElement('td');
-
-			titleCell.textContent = song.title;
-			artistCell.textContent = song.artists.join(', ');
-			genreCell.textContent = song.genres.join(', ');
-			yearCell.textContent = song.year;
-
-			row.appendChild(titleCell);
-			row.appendChild(artistCell);
-			row.appendChild(genreCell);
-			row.appendChild(yearCell);
-
-			songTable.appendChild(row);
-		}
-	</script>
 </body>
 </html>

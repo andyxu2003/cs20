@@ -2,17 +2,17 @@
   <head>
     <title>Read JSON file in HTML</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-    $.get( 
-        "json2.json", 
-        function(data) {
-            str = JSON.stringify(data);
-            var data = JSON.stringify(songList, null, 3);
-            document.body.innerHTML = data;
-        }
-    )       
-    </script>
+    <body>
+      <script>
+        $.get( 
+            "json2.json", 
+            function(data) {
+                str = JSON.stringify(data);
+                var array = JSON.stringify(str, null, 3);
+                document.body.innerHTML = array;
+            }
+        )       
+        </script>
+    </body>
   </head>
-  <body>
-  </body>
 </html>

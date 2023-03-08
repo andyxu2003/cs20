@@ -1,0 +1,99 @@
+<?xml-stylesheet href="css/hw03_style.css"?>
+<songlist>
+    <heading>Andy's Song List</heading>
+    <song>
+        <title>Creepin'</title>
+        <artist>Metro Boomin</artist>
+        <artist>The Weeknd, 21 Savage</artist>
+        <artist>21 Savage</artist>
+        <genre>Hip-Hop</genre>
+        <year>2022</year>
+    </song>
+    <song>
+        <title>Take Five</title>
+        <artist>Paul Desmond</artist>
+        <genre>Jazz</genre>
+        <year>1959</year>
+    </song>
+    <song>
+        <title>DNA</title>
+        <artist>BTS</artist>
+        <genre>K-Pop</genre>
+        <year>2017</year>
+    </song>
+    <song>
+        <title>INDUSTRY BABY</title>
+        <artist>Lil Nas X</artist>
+        <genre>Pop</genre>
+        <year>2021</year>
+    </song>
+    <song>
+        <title>Heartbreak Anniversary</title>
+        <artist>Giveon</artist>
+        <genre>R'n'B</genre>
+        <year>2020</year>
+    </song>
+    <song>
+        <title>Keanu Reaves</title>
+        <artist>Logic</artist>
+        <genre>Rap</genre>
+        <year>2019</year>
+    </song>
+    <song>
+        <title>Fukashigi no Carte</title>
+        <artist>Aniplex</artist>
+        <genre>Anime</genre>
+        <year>2018</year>
+    </song>
+    <song>
+        <title>Meant to Be</title>
+        <artist>Bebe Rexha</artist>
+        <artist>Florida Georgia Line</artist>
+        <genre>Country</genre>
+        <year>2017</year>
+    </song>
+    <song>
+        <title>Bohemian Rhapsody</title>
+        <artist>Queen</artist>
+        <genre>Rock</genre>
+        <year>1975</year>
+    </song>
+    <song>
+        <title>Für Elise</title>
+        <artist>Beethoven</artist>
+        <genre>Classical</genre>
+        <year>1810</year>
+    </song>
+    <song>
+        <title>Hype Boy</title>
+        <artist>NewJeans</artist>
+        <genre>K-Pop</genre>
+        <year>2022</year>
+    </song>
+    <song>
+        <title>OKWME</title>
+        <artist>Aminé</artist>
+        <genre>Rap</genre>
+        <genre>Hip-Hop</genre>
+        <year>2021</year>
+    </song>
+    <song>
+        <title>Coffee</title>
+        <artist>BTS</artist>
+        <genre>K-Pop</genre>
+        <year>2013</year>
+    </song>
+    <song>
+        <title>Sanctuary</title>
+        <artist>Joji</artist>
+        <genre>R'n'B</genre>
+        <genre>Soul</genre>
+        <year>2020</year>
+    </song>
+    <song>
+        <title>KAZINO</title>
+        <artist>BIBI</artist>
+        <genre>Hip-Hop</genre>
+        <year>2020</year>
+    </song>
+</songlist>

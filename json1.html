@@ -1,0 +1,106 @@
+<html>
+  <head>
+    <body>
+      <pre id="data"></pre>
+      <script>
+        const songList = {
+          songs: [
+            {
+              title: "Creepin'",
+              artists: ["Metro Boomin", "The Weeknd", "21 Savage"],
+              genres: ["Hip-Hop"],
+              year: 2022,
+            },
+            {
+              title: "Take Five",
+              artists: ["Paul Desmond"],
+              genres: ["Jazz"],
+              year: 1959,
+            },
+            {
+              title: "DNA",
+              artists: ["BTS"],
+              genres: ["K-Pop"],
+              year: 2017,
+            },
+            {
+              title: "INDUSTRY BABY",
+              artists: ["Lil Nas X"],
+              genres: ["Pop"],
+              year: 2021,
+            },
+            {
+              title: "Heartbreak Anniversary",
+              artists: ["Giveon"],
+              genres: ["R'n'B"],
+              year: 2020,
+            },
+            {
+              title: "Keanu Reaves",
+              artists: ["Logic"],
+              genres: ["Rap"],
+              year: 2019,
+            },
+            {
+              title: "Fukashigi no Carte",
+              artists: ["Aniplex"],
+              genres: ["Anime"],
+              year: 2018,
+            },
+            {
+              title: "Meant to Be",
+              artists: ["Bebe Rexha", "Florida Georgia Line"],
+              genres: ["Country"],
+              year: 2017,
+            },
+            {
+              title: "Bohemian Rhapsody",
+              artists: ["Queen"],
+              genres: ["Rock"],
+              year: 1975,
+            },
+            {
+              title: "Für Elise",
+              artists: ["Beethoven"],
+              genres: ["Classical"],
+              year: 1810,
+            },
+            {
+              title: "Hype Boy",
+              artists: ["NewJeans"],
+              genres: ["K-Pop"],
+              year: 2022,
+            },
+            {
+              title: "OKWME",
+              artists: ["Aminé"],
+              genres: ["Rap", "Hip-Hop"],
+              year: 2021,
+            },
+            {
+              title: "Coffee",
+              artists: ["BTS"],
+              genres: ["K-Pop"],
+              year: 2013,
+            },
+            {
+              title: "Sanctuary",
+              artists: ["Joji"],
+              genres: ["R'n'B", "Soul"],
+              year: 2020,
+            },
+            {
+              title: "KAZINO",
+              artists: ["BIBI"],
+              genres: ["Hip-Hop"],
+              year: 2020,
+            },
+          ],
+        };
+
+        var data = JSON.stringify(songList, null, 3);
+        document.getElementById("data").innerHTML = data;
+      </script>
+    </body>
+  </head>
+</html>

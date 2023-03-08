@@ -1,0 +1,64 @@
+<?xml-stylesheet href="css/hw03_style.css"?>
+<songlist>
+    <heading>Andy's Song List</heading>
+    <song>
+        <title>Creepin'</title>
+        <artist>Artists: Metro Boomin, The Weeknd, 21 Savage</artist>
+        <genre>Genre: Hip-Hop</genre>
+        <year>Year Released: 2022</year>
+    </song>
+    <song>
+        <title>Take Five</title>
+        <artist>Artist: Paul Desmond</artist>
+        <genre>Genre: Jazz</genre>
+        <year>Year Released: 1959</year>
+    </song>
+    <song>
+        <title>DNA</title>
+        <artist>Artist: BTS</artist>
+        <genre>Genre: K-Pop</genre>
+        <year>Year Released: 2017</year>
+    </song>
+    <song>
+        <title>INDUSTRY BABY</title>
+        <artist>Artist: Lil Nas X</artist>
+        <genre>Genre: Pop</genre>
+        <year>Year Released: 2021</year>
+    </song>
+    <song>
+        <title>Heartbreak Anniversary</title>
+        <artist>Artist: Giveon</artist>
+        <genre>Genre: R'n'B</genre>
+        <year>Year Released: 2020</year>
+    </song>
+    <song>
+        <title>Keanu Reaves</title>
+        <artist>Artist: Logic</artist>
+        <genre>Genre: Rap</genre>
+        <year>Year Released: 2019</year>
+    </song>
+    <song>
+        <title>Fukashigi no Carte</title>
+        <artist>Artist: Aniplex</artist>
+        <genre>Genre: Anime</genre>
+        <year>Year Released: 2018</year>
+    </song>
+    <song>
+        <title>Meant to Be</title>
+        <artist>Artists: Bebe Rexha, Florida Georgia Line</artist>
+        <genre>Genre: Country</genre>
+        <year>Year Released: 2017</year>
+    </song>
+    <song>
+        <title>Bohemian Rhapsody</title>
+        <artist>Artist: Queen</artist>
+        <genre>Genre: Rock</genre>
+        <year>Year Released: 1975</year>
+    </song>
+    <song>
+        <title>Für Elise</title>
+        <artist>Artist: Beethoven</artist>
+        <genre>Genre: Classical</genre>
+        <year>Year Released: 1810</year>
+    </song>
+</songlist>

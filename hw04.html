@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<head>
+    <title>Joe's Hotdogs</title>
+    <style>
+
+        body {
+            background-color: #EAAA00;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .heading_container {
+            background-color: #e6cdb5;
+            padding: 2%;
+        }
+        .heading {
+            font-size: 60px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .button_container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .button {
+            margin-top: 50px;
+            background-color: #BB2B1B;
+            border: none;
+            border-radius: 20px;
+            color: white;
+            padding: 30px 50px;
+            text-align: center;
+            display: inline-block;
+            font-size: 20px;
+            transition-duration: .3s;
+        }
+
+        .button:hover {
+            background-color: #8b0000;
+
+        }
+
+        .container {
+            margin: 7% 35% 0% 35%;
+
+        }
+
+        .text {
+            font-size: 20px;
+
+        }
+
+        .final_text {
+            font-weight: bold;
+            font-size: 30px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="heading_container">
+        <div class="heading">Welcome to Joe's Hotdogs!</div>
+    </div>
+
+    <div class="button_container">
+        <button class="button" onclick="order()">Click Here to Order</button>
+    </div>
+    <div class="container">
+        <p class="text" id="hotdog"></p>
+        <p class="text" id="fries"></p>
+        <p class="text" id="sodas"></p>
+        <p class="text" id="subtotal"></p>
+        <p class="text" id="discount"></p>
+        <p class="text" id="tax"></p>
+        <p class="final_text" id="final"></p>
+    </div>
+   
+
+<script>
+       
+    function order() {
+        function round(total) {
+            total = (parseInt(total * 1000));
+            if ((total % 10) >= 0 && (total % 10) < 5) {
+                total = total - (total % 10);
+            } else if ((total % 10) >= 5 && (total % 10) < 10) {
+                total = total + (10 - (total % 10));
+            }
+            return total = parseFloat(total);
+        }
+        function zero(total) {
+            if (total % 10 == 0 && total % 100 == 0 && total % 1000 == 0) {
+                zeros = ".00";
+            } else if (total % 10 == 0 && total % 100 == 0) {
+                zeros = "0";
+            } else {
+                zeros = "";
+            }
+            return zeros;
+        }
+        hotdog_price = 4;
+        fries_price = 3.5;
+        soda_price = 1.75;
+
+        num_hotdogs = prompt("How many hotdogs would you like?");
+        num_fries = prompt("How many fries would like?");
+        num_sodas = prompt("How many sodas would you like?");
+        
+
+        let hotdogs_total = num_hotdogs * hotdog_price;
+            hotdogs_total = round(hotdogs_total) / 1000;
+            document.getElementById("hotdog").innerHTML = num_hotdogs + " Hotdog(s) : $" + hotdogs_total + zero(round(hotdogs_total));
+
+        let fries_total = num_fries * fries_price;
+            fries_total = round(fries_total) / 1000;
+            document.getElementById("fries").innerHTML = num_fries + " Fries: $" + fries_total + zero(round(fries_total));
+
+        let sodas_total = num_sodas * soda_price;
+            sodas_total = round(sodas_total) / 1000;
+            document.getElementById("sodas").innerHTML = num_sodas + " Soda(s): $" + sodas_total + zero(round(sodas_total));
+
+        let total = (num_hotdogs * hotdog_price) + (num_fries * fries_price) + (num_sodas * soda_price);
+            total = round(total) / 1000;
+            document.getElementById("subtotal").innerHTML = "Subtotal: $" +  total + zero(round(total));
+        
+        if (total >= 20) {
+            discount_amt = total * .1;
+                discount_amt = round(discount_amt) / 1000;
+                document.getElementById("discount").innerHTML = "10% Discount: $" +  discount_amt + zero(round(discount_amt));
+            total = total - discount_amt;
+        } else {
+            document.getElementById("discount").innerHTML = "10% Discount: $0.00";
+        }
+        
+        tax_amt = total * .0625;
+            tax_amt = round(tax_amt) / 1000;
+            document.getElementById("tax").innerHTML = "Tax: $" +  tax_amt + zero(round(tax_amt));
+
+        total = total + tax_amt;
+            total = round(total) / 1000;
+            document.getElementById("final").innerHTML = "Final Total: $" + total + zero(round(total));
+    }
+</script>
+</body>
+</html>

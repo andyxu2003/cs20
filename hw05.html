@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<head>
+    <title>Tic Tac Toe</title>
+    <meta charset="UTF-8">
+    <style>
+        #title {
+            text-align: center;
+            font-size: 80px;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .startContainer {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .startButton {
+            background-color: red;
+            border: none;
+            border-radius: 20px;
+            color: white;
+            padding: 15px 55px;
+            text-align: center;
+            display: inline-block;
+            font-size: 20px;
+            font-weight: bold;
+            box-shadow: 0 6px #999;
+        }
+
+        .startButton:hover {background-color: #bf0000;}
+
+        .startButton:active {
+            background-color: #bf0000;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }       
+
+        table, td {
+            border: 2px solid black;
+            border-collapse: collapse;
+            margin-left: auto;
+            margin-right: auto;
+            table-layout: fixed;
+        }
+
+        td {
+            width: 125px;
+            height: 125px;
+            overflow: hidden;
+            text-align: center;
+            font-size: 80px;
+        }
+
+        .turn {
+            text-align: center;
+            font-size: 40px;
+            margin-top: 20px;
+        }
+
+        .resetContainer {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .resetButton {
+            background-color: blue;
+            border: none;
+            border-radius: 20px;
+            color: white;
+            padding: 15px 55px;
+            text-align: center;
+            display: inline-block;
+            font-size: 20px;
+            font-weight: bold;
+            box-shadow: 0 6px #999;
+        }
+
+        .resetButton:hover {background-color: #00008B;}
+
+        .resetButton:active {
+            background-color: #00008B;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }        
+
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</head>
+<body>
+    <div id="title">Tic-Tac-Toe</div>
+    <div class="startContainer">
+        <button type="button" id="start" class="startButton">Play</button>
+    </div>
+    
+    <table>
+        <tr>
+		    <td id="0"></td>
+			<td id="1"></td>
+			<td id="2"></td>
+		</tr>
+		<tr>
+			<td id="3"></td>
+			<td id="4"></td>
+			<td id="5"></td>
+		</tr>
+		<tr>
+			<td id="6"></td>
+			<td id="7"></td>
+			<td id="8"></td>
+	    </tr>
+    </table>
+    <div class="turn" id="turn"></div>
+    <div class="resetContainer">
+        <button type="button" id="reset" class="resetButton">Reset</button>
+    </div>
+
+<script>
+let board = ["", "", "", "", "", "", "", "", ""];
+const box = $("td");
+currPlayer = "X";
+gameWon = false;
+
+$("#start" ).click(function() {
+    $("#start").css("pointer-events","none");
+    player1 = prompt("Player 1: ");
+    player2 = prompt("Player 2: ");
+    $(document).ready(function() {
+        $("#turn").text(player1 + "'s Turn");
+        box.click(function() {
+        $(this).text(currPlayer);
+        box_num = $(this).attr('id');
+        board[box_num] = currPlayer;
+        wincondition();
+        if (board.every(checkdraw) && gameWon == false) {
+            draw();
+        } else if (gameWon == false) {
+            if (currPlayer == "X") {
+                currPlayer = currPlayer == "X" ? "O" : "X";
+                $("#turn").text(player2 + "'s Turn");
+                repeat();
+            } else {
+                currPlayer = currPlayer == "X" ? "O" : "X";
+                $("#turn").text(player1 + "'s Turn");
+                repeat();
+                }
+            }
+        })
+    });
+});
+
+$("#reset").click(function() {
+    reset();
+});
+
+function wincondition() {
+    let i = 0;
+    if ((board[0] == currPlayer && board[1] == currPlayer && board[2] == currPlayer) ||
+        (board[3] == currPlayer && board[4] == currPlayer && board[5] == currPlayer) ||
+        (board[6] == currPlayer && board[7] == currPlayer && board[8] == currPlayer) ||
+        (board[0] == currPlayer && board[3] == currPlayer && board[6] == currPlayer) ||
+        (board[1] == currPlayer && board[4] == currPlayer && board[7] == currPlayer) ||
+        (board[2] == currPlayer && board[5] == currPlayer && board[8] == currPlayer) ||
+        (board[0] == currPlayer && board[4] == currPlayer && board[8] == currPlayer) ||
+        (board[2] == currPlayer && board[4] == currPlayer && board[6] == currPlayer) &&
+         currPlayer == "X") {
+            alert(player1 + " has won!");
+            $("#turn").text(player1 + " has won! 🥳");
+            gameWon = true;
+            $(box).css("pointer-events","none");
+        } else if (
+        (board[0] == currPlayer && board[1] == currPlayer && board[2] == currPlayer) ||
+        (board[3] == currPlayer && board[4] == currPlayer && board[5] == currPlayer) ||
+        (board[6] == currPlayer && board[7] == currPlayer && board[8] == currPlayer) ||
+        (board[0] == currPlayer && board[3] == currPlayer && board[6] == currPlayer) ||
+        (board[1] == currPlayer && board[4] == currPlayer && board[7] == currPlayer) ||
+        (board[2] == currPlayer && board[5] == currPlayer && board[8] == currPlayer) ||
+        (board[0] == currPlayer && board[4] == currPlayer && board[8] == currPlayer) ||
+        (board[2] == currPlayer && board[4] == currPlayer && board[6] == currPlayer) &&
+         currPlayer == "O") {
+            alert(player2 + " has won!");
+            $("#turn").text(player2 + " has won! 🥳");
+            $("#turn").text("");
+            gameWon = true;
+            $(box).css("pointer-events","none");
+        }
+    }
+
+function draw() {
+    alert("Tie");
+    $("#turn").text("Tie");
+}
+
+function checkdraw(index) {
+    return index != "";
+}
+
+function repeat() {
+    for (let i = 0; i < board.length; i++) {
+        if (board[i] == "X" || board[i] == "O") {
+            pos = String(i);
+            $("#" + pos).css("pointer-events","none");
+        }
+    }
+}
+
+function reset() {
+    board = ["", "", "", "", "", "", "", "", ""];
+    currentPlayer = "X";
+    box.text("");
+    gameWon = false;
+    $(box).css("pointer-events","auto");
+    $("#turn").text(player1 + "'s Turn");
+}
+
+</script>
+</body>

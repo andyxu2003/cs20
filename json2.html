@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>Read JSON file in HTML</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $.get( 
+        "json2.json", 
+        function(data) {
+            str = JSON.stringify(data);
+            document.write(str);
+            console.log(str);
+        }
+    )       
+ 
+
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Jade Delight</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> <!-- adding jquery library -->
+<style>
+    /*Adding style for boxes*/
+    .userInfo label {
+      display: inline-block;
+      width: 120px;
+      text-align: right;
+      margin-right: 10px;
+    }
+  
+    .userInfo input[type=text] {
+      width: 300px;
+    }
+</style>
+</head>
+<body>
+<script>
+function MenuItem(name, cost)
+{
+this.name = name;
+this.cost=cost;
+}
+
+menuItems = new Array(
+new MenuItem("Chicken Chop Suey", 5.5),
+new MenuItem("Sweet and Sour Pork", 7.25),
+new MenuItem("Shrimp Lo Mein", 6.80),
+new MenuItem("Moo Shi Chicken", 9.50),
+new MenuItem("Fried Rice", 3.25)
+);
+
+function makeSelect(name, minRange, maxRange)
+{
+	var t= "";
+	t = "<select name='" + name + "' size='1' onchange='updateTotalCosts();'>";
+	for (j=minRange; j<=maxRange; j++)
+	   t += "<option>" + j + "</option>";
+	t+= "</select>"; 
+	return t;
+}
+
+
+function td(content, className="")
+{
+return "<td class = '" + className + "'>" + content + "</td>";
+}
+
+//Adding functionality
+$(document).ready(function(){ 
+$('select').change(function(){ // on quantity select change
+var index = $(this).attr('name').substring(4); // get the index of item in menuItems array
+var quantity = parseInt($(this).val()); // get the quantity selected
+var totalCost = (menuItems[index].cost * quantity).toFixed(2); // calculate total cost
+$(this).parent().siblings('.totalCost').html('$<input type="text" name="cost" value="'+totalCost+'"/>'); // update the total cost field for the item
+});
+});
+
+function updateTotalCosts() {
+  var totalCosts = document.getElementsByName('cost');
+  var subTotal = 0.0;
+  for (i=0; i<menuItems.length; i++) {
+    var quantity = parseInt(document.getElementsByName('quan'+i)[0].value);
+    var totalCost = (quantity * menuItems[i].cost).toFixed(2);
+    totalCosts[i].value = totalCost;
+    subTotal += parseFloat(totalCost);
+  }
+  var tax = (subTotal * 0.0625).toFixed(2);
+  var total = (parseFloat(subTotal) + parseFloat(tax)).toFixed(2);
+  document.getElementById('subtotal').value = subTotal.toFixed(2);
+  document.getElementById('tax').value = tax;
+  document.getElementById('total').value = total;
+}
+
+$(document).ready(function() {
+  // Hide the street and city fields initially
+  $('.address').hide();
+  
+  $('input[name=p_or_d]').change(function() {
+    if($(this).val() == 'delivery') {
+      // Show the street and city fields if delivery is selected
+      $('.address').show();
+    } else {
+      // Hide the street and city fields if pickup is selected
+      $('.address').hide();
+    }
+  });
+});
+
+$(document).ready(function() {
+
+$("input[value='Submit Order']").click(function() {
+
+  var firstName = $("input[name='fname']").val();
+  var lastName = $("input[name='lname']").val();
+  var street = $("input[name='street']").val();
+  var city = $("input[name='city']").val();
+  var phone = $("input[name='phone']").val();
+  var pickupOrDelivery = $("input[name='p_or_d']:checked").val();
+  var order_items = $("input[name='order_items[]']:checked");
+
+  // Check if at least one item is selected
+  ordered = false;
+  for (i = 0; i < menuItems.length; i++) {
+      var quantity = parseInt($('[name="quan'+i+'"]').val());
+      if (quantity > 0) {
+        ordered = true;
+        break;
+      }
+    }
+    if (!ordered) {
+      alert("Please select at least one item.");
+      return false;
+    }
+
+  // Verify that full name was entered
+  if (firstName == "" || lastName == "") {
+    alert("Please enter your full name.");
+    return false;
+  }
+
+  // Verify that phone number was provided and has 7 or 10 numbers
+  var phoneNumbers = phone.replace(/[^0-9]/g, '');
+  if (phoneNumbers.length != 7 && phoneNumbers.length != 10) {
+    alert("Please enter a valid phone number with 7 or 10 digits.");
+    return false;
+  }
+
+  // If delivery is selected, verify that street and city are provided
+  if (pickupOrDelivery == "delivery") {
+    if (street == "" || city == "") {
+      alert("Please enter your street and city for delivery.");
+      return false;
+    }
+  }
+
+  // Calculate actual time based on pickup or delivery
+  var currentTime = new Date();
+  var actualTime;
+  if (pickupOrDelivery == "pickup") {
+    actualTime = new Date(currentTime.getTime() + 15 * 60000);
+  } else {
+    actualTime = new Date(currentTime.getTime() + 45 * 60000);
+  }
+    var hours = actualTime.getHours();
+    var minutes = actualTime.getMinutes();
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; 
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    var timeString = hours + ':' + minutes + ' ' + ampm;
+
+  // Calculate subtotal, tax, and total costs
+  var subtotal = 0;
+  $("select[name^='quan']").each(function() {
+    var quantity = parseInt($(this).val());
+    var cost = parseFloat($(this).parent().siblings(".cost").text().replace("$", ""));
+    var totalCost = quantity * cost;
+    $(this).parent().siblings(".totalCost").children("input[name='cost']").val(totalCost.toFixed(2));
+    subtotal += totalCost;
+  });
+  var tax = subtotal * 0.0625;
+  var total = subtotal + tax;
+
+  alert("Thank you for ordering!")
+
+  //Display items and quantity
+  var itemsOrdered = "";
+  costForEachItem = "";
+  var subtotal = 0;
+  for (i=0; i< menuItems.length; i++) {
+    var quantity = $("select[name='quan" + i + "']").val();
+    var itemCost = menuItems[i].cost;
+    if (quantity > 0) {
+      itemsOrdered += quantity + " x " + menuItems[i].name + "&nbsp;&nbsp;&nbsp;&nbsp;";
+      costForEachItem += menuItems[i].name + ": $" + menuItems[i].cost.toFixed(2) + "&nbsp;&nbsp;&nbsp;&nbsp;";
+      subtotal += quantity * itemCost;
+    }
+  }
+  var taxRate = 0.0625;
+  var taxAmount = subtotal * taxRate;
+  var total = subtotal + taxAmount;
+  
+  //Display order summary in new window
+  var newWindow = window.open("", "Order Summary", "width=400, height=400");
+
+  newWindow.document.write("<h2>Order Summary</h2>");
+  newWindow.document.write("<p>" + itemsOrdered + "</p>");
+  newWindow.document.write("<p>" + costForEachItem + "</p>")
+
+  newWindow.document.write("<table>");
+  newWindow.document.write("<tr><td>Subtotal:</td><td>$" + subtotal.toFixed(2) + "</td></tr>");
+  newWindow.document.write("<tr><td>Tax (6.25%):</td><td>$" + taxAmount.toFixed(2) + "</td></tr>");
+  newWindow.document.write("<tr><td>Total:</td><td>$" + total.toFixed(2) + "</td></tr>");
+  newWindow.document.write("</table>");
+  newWindow.document.write('<p> Your order will be ready at ' + timeString + '</p>');
+
+  return false;
+});
+});
+
+</script>
+<h1>Jade Delight</h1>
+<form id="orderForm">
+<p class="userInfo"><label>First Name:</label> <input type="text"  name='fname' /></p>
+<p class="userInfo"><label>Last Name*:</label>  <input type="text"  name='lname' /></p>
+<p class="userInfo address"><label>Street*:</label> <input type="text" name='street' /></p>
+<p class="userInfo address"><label>City*:</label> <input type="text" name='city' /></p>
+<p class="userInfo"><label>Phone*:</label> <input type="text"  name='phone' /></p>
+<p> 
+	<input type="radio"  name="p_or_d" value = "pickup" checked="checked"/>Pickup  
+	<input type="radio"  name='p_or_d' value = 'delivery'/>
+	Delivery
+</p>
+<table border="0" cellpadding="3">
+  <tr>
+    <th>Select Item</th>
+    <th>Item Name</th>
+    <th>Cost Each</th>
+    <th>Total Cost</th>
+  </tr>
+<script>
+var s = "";
+for (i=0; i< menuItems.length; i++)
+{
+s += "<tr>";
+s += td(makeSelect("quan" + i, 0, 10),"selectQuantity");
+s += td(menuItems[i].name, "itemName");
+s += td("$" +menuItems[i].cost.toFixed(2), "cost");
+s += td("$<input type='text' name='cost' class='totalCost'/>", "totalCost");
+s+= "</tr>";
+}
+document.writeln(s);
+</script>
+
+</table>
+<p class="subtotal totalSection"><label>Subtotal</label>: 
+   $ <input type="text"  name='subtotal' id="subtotal" />
+</p>
+<p class="tax totalSection"><label>Mass tax 6.25%:</label>
+  $ <input type="text"  name='tax' id="tax" />
+</p>
+<p class="total totalSection"><label>Total:</label> $ <input type="text"  name='total' id="total" />
+</p>
+
+<input type = "button" value = "Submit Order" />
+
+</form>
+</body>
+</html>

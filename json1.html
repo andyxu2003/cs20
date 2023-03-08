@@ -1,7 +1,6 @@
 <html>
   <head>
     <body>
-      <pre id="data"></pre>
       <script>
         const songList = {
           songs: [
@@ -99,7 +98,7 @@
         };
 
         var data = JSON.stringify(songList, null, 3);
-        document.getElementById("data").innerHTML = data;
+        document.body.innerHTML = data;
       </script>
     </body>
   </head>

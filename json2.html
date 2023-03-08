@@ -39,8 +39,8 @@
     $.get( 
             "https://andyxu2003.github.io/cs20/json2.json", 
             function(data) {
-                const songList = JSON.stringify(data, null, 3);
-                //document.body.innerHTML = songList;
+              songList = JSON.stringify(data);
+              document.write(songList);
             }
         )     
 

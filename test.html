@@ -1,107 +1,43 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>JSON Display with Filter</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <style>
-      .divide {
-        margin: 20px;
-      }
-    </style>
-    <script>
-	var jsonString = "";
-      $(document).ready(function () {
-        $.getJSON(
-          "https://andyxu2003.github.io/cs20/json2.json",
-          function (data) {
-            var genres = [];
-			
+<head>
+  <meta charset="UTF-8">
+  <title>Random Duck Image</title>
+</head>
+<body>
+  <button id="fetch-button">Get a Random Duck</button>
+  <img id="duck-image" src="" alt="">
+  <script>
+    // Add an event listener to the button
+    document.getElementById("fetch-button").addEventListener("click", function() {
+      // Create a new XMLHttpRequest object
+      var xhttp = new XMLHttpRequest();
 
-            $.each(data.songList, function (key, value) {
-              // Add each genre to array
-              $.each(value.genres, function (index, genre) {
-                if (!genres.includes(genre)) {
-                  genres.push(genre);
-                }
-              });
-            });
-            // Sort array alphabetically
-            genres.sort();
+      // Set the URL of the API endpoint
+      var url = "https://random-d.uk/api/random";
 
-            // Add genres to select element
-            $.each(genres, function (key, value) {
-              $("#genreSelect").append(
-                $("<option></option>").attr("value", value).text(value)
-              );
-            });
+      // Set the HTTP method to GET
+      var method = "GET";
 
-			jsonString = JSON.stringify({"songList": allSongs}, null, 2);
+      // Open the XMLHttpRequest object
+      xhttp.open(method, url);
 
-            // Display all songs by default
-            displaySongs(data.songList);
+      // Set a callback function to handle the response
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          // Get the URL of the random duck image from the response
+          var data = JSON.parse(this.responseText);
+          var imageUrl = data.url;
 
-            // Handle form submission
-            $("#filterForm").submit(function (event) {
-              event.preventDefault();
-              var selectedGenre = $("#genreSelect").val();
-              var filteredSongs = $.grep(data.songList, function (song) {
-                return song.genres.includes(selectedGenre);
-              });
-              displaySongs(filteredSongs);
-            });
-          }
-        );
-      });
+          // Update the image element with the URL of the random duck image
+          var imageElement = document.getElementById("duck-image");
+          imageElement.src = imageUrl;
+        }
+      };
 
-      function displaySongs(songs) {
-        // Clear song list
-        $("#songList").empty();
-
-        // Display each song
-        $.each(songs, function (key, value) {
-          var output =
-            "<p>Title: " +
-            value.title +
-            "<br>" +
-            "Artists: " +
-            value.artists.join(", ") +
-            "<br>" +
-            "Genres: " +
-            value.genres.join(", ") +
-            "<br>" +
-            "Year: " +
-            value.year +
-            "</p>";
-          $("#songList").append(output);
-        });
-
-        // Update the raw JSON string
-        $("#jsonString").text(jsonString);
-      }
-    </script>
-    <!-- <script>
-      $(document).ready(function () {
-        $("#jsonString").hide();
-        $("button").click(function () {
-          $(".hide").toggle();
-        });
-      });
-    </script> -->
-  </head>
-  <body>
-	<h1>
-		Andy's JSON Song List
-	</h1>
-    <button>Raw JSON String</button>
-    <div class="divide"></div>
-    <p id="jsonString" class="hide"></p>
-    <form id="filterForm">
-      <label for="genreSelect">Genre:</label>
-      <select id="genreSelect">
-        <option value="">All</option>
-      </select>
-      <button type="submit">Filter</button>
-    </form>
-    <div id="songList"></div>
-  </body>
+      // Send the request
+      xhttp.send();
+    });
+  </script>
+</body>
 </html>

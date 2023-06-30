@@ -1,0 +1,93 @@
+@import url("https://fonts.googleapis.com/css?family=Lato");
+
+body {
+  font-family: "Lato", sans-serif;
+  background-color: #fff9ae;
+  margin: 20px 0 0 0;
+}
+
+h1 {
+  text-align: center;
+  color: black;
+  font-weight: bolder;
+}
+
+/* recipe container */
+#recipe-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  justify-items: center;
+  margin: 0 20px;
+}
+/* recipe */
+.recipe {
+  margin: 20px;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 400px;
+  background-color: white;
+}
+
+/* recipe name */
+.recipe h2 {
+  margin-top: 0;
+  font-size: 30px;
+  font-weight: bolder;
+}
+
+/* link */
+.recipe a {
+  font-size: large;
+  font-weight: bolder;
+}
+
+/* image */
+.recipe img {
+  display: block;
+  margin: 10px auto;
+  max-width: 90%;
+  height: auto;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+/* ingredients */
+.recipe ul {
+  list-style: none;
+  margin-top: 0;
+  padding: 0;
+}
+
+/* space between ingredients */
+.recipe ul li {
+  margin-bottom: 8px;
+}
+
+/* recipe time and ingredients title */
+.recipe p {
+  display: block;
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+/* buy ingredients button */
+.recipe button {
+  display: inline-block;
+  background-color: #d21312;
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px 0 15px 27%;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.recipe button:hover {
+  background-color: #8b0000;
+}

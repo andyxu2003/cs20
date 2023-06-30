@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Stock Ticker Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"],
+    input[type="submit"] {
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    input[type="submit"] {
+      background-color: black;
+      color: white;
+      font-weight: bold;
+    }
+  </style>
+  </style>
+</head>
+
+<body>
+  <form action="/process" method="post">
+    <label>
+      <input type="radio" name="input-type" value="symbol" /> Ticker Symbol
+    </label>
+    <label>
+      <input type="radio" name="input-type" value="company" /> Company Name
+    </label>
+    <br />
+    <label>
+      Enter stock ticker symbol or company name:
+      <input type="text" name="input-field" />
+    </label>
+    <br />
+    <input type="submit" value="Submit" />
+  </form>
+</body>
+
+</html>

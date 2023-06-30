@@ -1,43 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Random Duck Image</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout</title>
 </head>
 <body>
-  <button id="fetch-button">Get a Random Duck</button>
-  <img id="duck-image" src="" alt="">
-  <script>
-    // Add an event listener to the button
-    document.getElementById("fetch-button").addEventListener("click", function() {
-      // Create a new XMLHttpRequest object
-      var xhttp = new XMLHttpRequest();
-
-      // Set the URL of the API endpoint
-      var url = "https://random-d.uk/api/random";
-
-      // Set the HTTP method to GET
-      var method = "GET";
-
-      // Open the XMLHttpRequest object
-      xhttp.open(method, url);
-
-      // Set a callback function to handle the response
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          // Get the URL of the random duck image from the response
-          var data = JSON.parse(this.responseText);
-          var imageUrl = data.url;
-
-          // Update the image element with the URL of the random duck image
-          var imageElement = document.getElementById("duck-image");
-          imageElement.src = imageUrl;
-        }
-      };
-
-      // Send the request
-      xhttp.send();
-    });
-  </script>
+  <h1>Checkout</h1>
+  <form action="/checkout" method="post">
+    <div class="billing-address">
+      <h2>Billing Address</h2>
+      <label for="first-name">First Name</label>
+      <input type="text" id="first-name" name="first_name" required>
+      <label for="last-name">Last Name</label>
+      <input type="text" id="last-name" name="last_name" required>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+      <label for="address">Address</label>
+      <input type="text" id="address" name="address" required>
+      <label for="city">City</label>
+      <input type="text" id="city" name="city" required>
+      <label for="state">State</label>
+      <input type="text" id="state" name="state" required>
+      <label for="zip">Zip Code</label>
+      <input type="text" id="zip" name="zip" required>
+    </div>
+    <div class="shipping-address">
+      <h2>Shipping Address</h2>
+      <input type="checkbox" id="ship-to-billing" name="ship_to_billing" checked> Ship to billing address
+      <div id="shipping-address-container" style="display: none;">
+        <label for="shipping-first-name">First Name</label>
+        <input type="text" id="shipping-first-name" name="shipping_first_name">
+        <label for="shipping-last-name">Last Name</label>
+        <input type="text" id="shipping-last-name" name="shipping_last_name">
+        <label for="shipping-address">Address</label>
+        <input type="text" id="shipping-address" name="shipping_address">
+        <label for="shipping-city">City</label>
+        <input type="text" id="shipping-city" name="shipping_city">
+        <label for="shipping-state">State</label>
+        <input type="text" id="shipping-state" name="shipping_state">
+        <label for="shipping-zip">Zip Code</label>
+        <input type="text" id="shipping-zip" name="shipping_zip">
+      </div>
+    </div>
+    <div class="payment-method">
+      <h2>Payment Method</h2>
+      <input type="radio" name="payment_method" value="credit-card" checked> Credit Card
+      <input type="radio" name="payment_method" value="paypal"> PayPal
+      <div id="credit-card-container">
+        <label for="card-number">Card Number</label>
+        <input type="text" id="card-number" name="card_number" required>
+        <label for="card-expiration">Expiration Date</label>
+        <input type="text" id="card-expiration" name="card_expiration" required>
+        <label for="card-cvv">CVV</label>
+        <input type="text" id="card-cvv" name="card_cvv" required>
+      </div>
+      <div id="paypal-container" style="display: none;">
+        <input type="text" name="paypal-email" placeholder="PayPal Email">
+      </div>
+    </div>
+    <input type="submit" value="Submit">
+  </form>
 </body>
 </html>

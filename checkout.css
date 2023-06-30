@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css?family=Lato");
+
+body {
+    font-family: "Lato", sans-serif;
+    margin: 0;
+    background-color: #FAA0A0;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  /* Style for the table */
+  table {
+    border-collapse: collapse;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    border-radius: 10px;
+    font-size: 18px;
+  }
+
+  td {
+    padding: 25px 30px;
+    text-align: left;
+    background-color: white;
+    border-radius: 10px;
+  }
+
+  /* Style for the remove button */
+  .remove-button {
+    display: block;
+    margin-left: 20px;
+  }
+
+  .remove-button button {
+    background-color: #e74c3c;
+    border: none;
+    color: white;
+    padding: 6px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  .remove-button button:hover {
+    background-color: #c0392b;
+  }
+
+  /* Style for the subtotal row */
+  tr.subtotal td:last-child {
+    font-weight: bold;
+  }
+
+  /* Style for the item image */
+  .item-image {
+    width: 100px;
+    height: 100px;
+    margin-right: 30px;
+    vertical-align: middle;
+  }
+
+  #quantity {
+    width: 100%;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 3px;
+  }
+
+  #subtotal {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 24px;
+    font-weight: bolder;
+  }

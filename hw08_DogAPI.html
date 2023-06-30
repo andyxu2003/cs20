@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>The Dog API</title>
+<style>
+    body {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        background-color: #202020;
+        color: #fff;
+        padding: 1rem;
+      }
+      h1 {
+        margin: 0;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 1rem;
+      }
+      button {
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        padding: 1rem;
+        margin-right: 1rem;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #3E8E41;
+      }
+      #data {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      img {
+        max-width: 100%;
+        margin-bottom: 1rem;
+      }
+      pre {
+        margin: 0;
+        padding: 1rem;
+        background-color: #f0f0f0;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+</style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>The Dog API</h1>
+      </div>
+    </header>
+    <div class="container">
+      <h2>Get Random Dog Image</h2>
+      <button id="ajaxBtn">Show a dog (AJAX)</button>
+      <button id="fetchBtn">Show a dog (Fetch)</button>
+      <div id="data"></div>
+
+    <h2>What is The Dog API and what does it do?</h2>
+    <div>
+      The internet's biggest collection of open source dog pictures. The API
+      allows users to programmatically access a vast collection of dog-related
+      data, including images, breeds, sub-breeds, and more. It provides
+      endpoints that return data in JSON format, which can be easily consumed by
+      client applications
+    </div>
+    <br />
+
+    <h2>Where was The Dog API found?</h2>
+    <div>
+      I found the API on the Github list of public APIs:
+      <a href="https://github.com/public-apis/public-apis"
+        >https://github.com/public-apis/public-apis</a
+      >
+    </div>
+
+    <h2>What options were used for the API request?</h2>
+    <ul>
+      <li>HTTP method: GET</li>
+      <li>URL: https://dog.ceo/api/breeds/image/random</li>
+      <li>Response format: JSON</li>
+    </ul>
+    <div>
+      The options used for the API request determine how the request is made to
+      the API and what format the response will be in. In this case, I used the
+      GET method to retrieve a random image of a dog breed from the API's
+      endpoint, which returns the data in JSON format.
+    </div>
+
+    <h2>How would The Dog API be useful?</h2>
+    <ul>
+      <li>
+        Dog-related websites and applications: The Dog API can be used to
+        retrieve images of dogs to display on dog-related websites and
+        applications. For example, a dog breed identification app could use this
+        API to show images of various dog breeds to users.
+      </li>
+      <li>
+        Machine learning and computer vision: The Dog API could be used as a
+        source of training data for machine learning and computer vision
+        applications. For example, a machine learning model that can classify
+        dog breeds based on images could be trained using the images retrieved
+        from this API
+      </li>
+    </ul>
+
+    <script>
+      const ajaxBtn = document.getElementById("ajaxBtn");
+      const fetchBtn = document.getElementById("fetchBtn");
+      const dataDiv = document.getElementById("data");
+
+      // AJAX request
+      ajaxBtn.addEventListener("click", () => {
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          if (this.readyState === 4 && this.status === 200) {
+            const data = JSON.parse(this.responseText);
+            displayData(data);
+          }
+        };
+        xhr.open("GET", "https://dog.ceo/api/breeds/image/random");
+        xhr.send();
+      });
+
+      // Fetch request
+      fetchBtn.addEventListener("click", () => {
+        fetch("https://dog.ceo/api/breeds/image/random")
+          .then((response) => response.json())
+          .then((data) => displayData(data));
+      });
+
+      function displayData(data) {
+        dataDiv.innerHTML = ""; // clear previous data
+        const img = document.createElement("img");
+        img.src = data.message;
+        dataDiv.appendChild(img);
+
+        const pre = document.createElement("pre");
+        pre.textContent = JSON.stringify(data, null, 2);
+        dataDiv.appendChild(pre);
+      }
+    </script>
+  </body>
+</html>

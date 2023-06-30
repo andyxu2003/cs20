@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Checkout Page</title>
+    <link rel="stylesheet" href="checkout.css">
+  </head>
+  <body>
+    <h1>Checkout Page</h1>
+    <table>
+        <colgroup>
+            <col span="1" style="width: 77%;">
+            <col span="1" style="width: 18%;">
+            <col span="1" style="width: 5%;">
+            <col span="1" style="width: 0%;">
+         </colgroup>
+        <tr>
+          <td>
+            <img
+              src="https://www.allrecipes.com/thmb/T1WRI2Jv6Fv5Zri8CSF2yVOnoIA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/dozen-eggs-in-carton-e0ef92dabf374e5ea9aea7fba2219902.png"
+              alt="Eggs"
+              class="item-image"
+            />
+            Eggs
+          </td>
+          <td><input type="number" min="1" value="1" id="quantity"/></td>
+          <td>$5.00</td>
+          <td>
+            <div class="remove-button">
+              <button>Remove</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <img
+              src="https://m.media-amazon.com/images/I/81vPkvYVsrL.jpg"
+              alt="Flour"
+              class="item-image"
+            />
+            Flour
+          </td>
+          <td><input type="number" min="1" value="1" id="quantity"/></td>
+          <td>$2.50</td>
+          <td>
+            <div class="remove-button">
+              <button>Remove</button>
+            </div>
+          </td>
+        </tr>
+    </table>
+
+    <div id="subtotal">
+        Subtotal: $7.50
+    </div>
+  </body>
+</html>

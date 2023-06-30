@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Recipes</title>
+    <link rel="stylesheet" type="text/css" href="recipes.css" />
+  </head>
+  <body>
+    <h1>Recipes</h1>
+    <div id="recipe-container"></div>
+    <script>
+      var recipes = [
+        {
+          name: "Spaghetti Bolognese",
+          recipeUrl: "https://www.recipetineats.com/spaghetti-bolognese/",
+          imgUrl:
+            "https://images.eatsmarter.com/sites/default/files/styles/max_size/public/spaghetti-bolognese-original-582182.jpg",
+          ingredients: [
+            "Spaghetti",
+            "Ground beef",
+            "Tomato sauce",
+            "Garlic",
+            "Olive oil",
+            "Salt",
+            "Pepper",
+            "Parmesan cheese",
+          ],
+          totalTime: "30"
+        },
+        {
+          name: "Chicken Tacos",
+          recipeUrl: "https://www.blessthismessplease.com/chicken-tacos/",
+          imgUrl:
+            "https://www.allrecipes.com/thmb/UuPQ632-v8TVuGv3kH7buxuO_mw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/242342-fiesta-slow-cooker-shredded-chicken-tacos-ddmfs-3X2-0902-775cf5010b5b46cdbdf2ca50993628a9.jpg",
+          ingredients: [
+            "Chicken breast",
+            "Taco seasoning",
+            "Corn tortillas",
+            "Lettuce",
+            "Tomatoes",
+            "Sour cream",
+            "Salsa",
+            "Cheddar cheese",
+          ],
+          totalTime: "25"
+        },
+        {
+          name: "Beef Stir-Fry",
+          recipeUrl:
+            "https://www.allrecipes.com/recipe/228823/quick-beef-stir-fry/",
+          imgUrl:
+            "https://www.foodnetwork.com/content/dam/images/food/fullset/2015/12/16/3/FNM_010116-Beef-Stir-Fry-Recipe_s4x3.jpg",
+          ingredients: [
+            "Beef sirloin",
+            "Broccoli",
+            "Carrots",
+            "Red bell pepper",
+            "Green onions",
+            "Soy sauce",
+            "Cornstarch",
+            "Garlic",
+            "Vegetable oil",
+          ],
+          totalTime: "20"
+        },
+      ];
+      var recipeContainer = document.getElementById("recipe-container");
+
+      for (var i = 0; i < recipes.length; i++) {
+        var recipe = recipes[i];
+
+        var recipeDiv = document.createElement("div");
+        recipeDiv.classList.add("recipe");
+
+        var recipeName = document.createElement("h2");
+        recipeName.textContent = recipe.name;
+        recipeDiv.appendChild(recipeName);
+
+        var recipeLink = document.createElement("a");
+        recipeLink.href = recipe.recipeUrl;
+        recipeLink.textContent = "Get Recipe";
+        recipeDiv.appendChild(recipeLink);
+
+        var recipeImg = document.createElement("img");
+        recipeImg.src = recipe.imgUrl;
+        recipeImg.alt = recipe.name;
+        recipeDiv.appendChild(recipeImg);
+
+        var recipeIngredientsHeader = document.createElement("p");
+        recipeIngredientsHeader.textContent = "Ingredients:";
+        recipeDiv.appendChild(recipeIngredientsHeader);
+
+        var recipeIngredients = document.createElement("ul");
+        for (var j = 0; j < recipe.ingredients.length; j++) {
+          var ingredient = recipe.ingredients[j];
+          var ingredientLi = document.createElement("li");
+          ingredientLi.textContent = ingredient;
+          recipeIngredients.appendChild(ingredientLi);
+        }
+        recipeDiv.appendChild(recipeIngredients);
+
+        var recipeTime = document.createElement("p");
+        recipeTime.textContent = "Total Time: " + recipe.totalTime + " minutes";
+        recipeDiv.appendChild(recipeTime);
+
+        var buyIngredientsBtn = document.createElement("button");
+        buyIngredientsBtn.textContent = "Buy ingredients";
+        recipeDiv.appendChild(buyIngredientsBtn);
+
+        recipeContainer.appendChild(recipeDiv);
+      }
+    </script>
+  </body>
+</html>
